@@ -44,6 +44,7 @@
   "https://m.21jingji.com/article/20260723/herald/79984a6573f7847fce8d0a24a588dfde.html": "https://ocmsmedia.sfccn.com/vod-4310da/image/default/877C3F3A41BC4A36A57424692594F551-6-2.png",
   "https://tt.xinmin.cn/2026/06/30/32892069.htm": "https://images.shobserver.com/news/690_390/2026/06/30/l_cb20260630174946778021.jpeg"
 };
+  window.articleCovers = sourceCovers;
   const fallback = {
     promo: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80',
     retail: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80',
@@ -63,12 +64,24 @@
   const mount = scope => {
     if (!scope.querySelectorAll) return;
     scope.querySelectorAll('.card').forEach(card => {
-      if (card.querySelector('.card-preview') || /今日启示/.test(card.textContent)) return;
+      if (/今日启示/.test(card.textContent)) return;
       const text = card.textContent || '';
       const articleLink = [...card.querySelectorAll('a[href^="http"]')].map(link => link.href)[0] || '';
       const original = card.dataset.cover || sourceCovers[articleLink] || '';
+      const existing = card.querySelector('.card-preview');
+      if (existing) {
+        if (original && existing.dataset.fallback === 'true') {
+          const existingImage = existing.querySelector('img');
+          const existingLabel = existing.querySelector('span');
+          if (existingImage) existingImage.src = original;
+          if (existingLabel) existingLabel.textContent = '原文图片';
+          existing.dataset.fallback = 'false';
+        }
+        return;
+      }
       const preview = document.createElement('div');
       preview.className = 'card-preview';
+      preview.dataset.fallback = original ? 'false' : 'true';
       const image = document.createElement('img');
       image.loading = 'lazy';
       image.decoding = 'async';
