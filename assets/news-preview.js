@@ -1,10 +1,7 @@
 (() => {
   const sourceCovers = {
   "https://socialbeta.com/campaign/28049": "https://socialbeta.oss-cn-hangzhou.aliyuncs.com/upload/210618-1785227908.jpg",
-  "https://socialbeta.com/campaign/28058": "https://socialbeta.com/Upload/ava/1.jpg",
   "https://socialbeta.com/campaign/28052": "https://socialbeta.oss-cn-hangzhou.aliyuncs.com/upload/198246-1785235505.jpg",
-  "https://socialbeta.com/campaign/28056": "https://socialbeta.com/Upload/ava/1.jpg",
-  "https://socialbeta.com/campaign/28010": "https://socialbeta.com/Upload/ava/1.jpg",
   "https://news.winshang.com/html/074/1364.html": "https://img1.winshang.com/newsimg/wsimg/2026/7/20260729094743869_063f2c02c95044538b8a6a8ce34319b4.jpg",
   "http://www.linkshop.com/news/2026550376.shtml": "http://www.linkshop.com/atlas/sltuthumbnail/20250729153549686865_thumb.jpg",
   "https://news.winshang.com/html/074/1365.html": "https://img1.winshang.com/newsimg/wsimg/2026/7/20260729100032500_ae0f08776ff648eb854443a1c6925681.jpg",
@@ -18,8 +15,6 @@
   "http://www.linkshop.com/news/2026550370.shtml": "http://www.linkshop.com/upload/article/2026/20260729182532_1079.jpg",
   "http://www.linkshop.com/news/2026550369.shtml": "http://www.linkshop.com/upload/article/2026/20260730093649_3350.jpg",
   "https://socialbeta.com/article/111256": "https://socialbeta.oss-cn-hangzhou.aliyuncs.com/upload/45905-1785311728.jpg');",
-  "https://www.canyin88.com/kuaixun/2026/0729/112714.html": "https://service.weibo.com/share/share.php?appkey=1343713053&url=https://www.canyin88.com/kuaixun/2026/0729/112714.html&title=继深圳之后，茶颜悦色计划9月开出广州首店&pic=https://img.canyin88.com/article/19e8f9458005c36d8acbdb83ce81a496.png?imageMogr2/thumbnail/225x",
-  "https://socialbeta.com/campaign/28040": "https://socialbeta.com/Upload/ava/1.jpg",
   "https://socialbeta.com/campaign/28055": "https://socialbeta.oss-cn-hangzhou.aliyuncs.com/upload/38450-1785208882.png",
   "https://news.winshang.com/html/074/1363.html": "https://img1.winshang.com/newsimg/wsimg/2026/7/20260729094403676_6828ffd0bf604f33926e11a2a6d78cf2.png",
   "https://socialbeta.com/campaign/27909": "https://socialbeta.oss-cn-hangzhou.aliyuncs.com/upload/38450-1785135159.jpg",
@@ -27,12 +22,10 @@
   "http://www.linkshop.com/news/2026550357.shtml": "http://www.linkshop.com/atlas/sltuthumbnail/20260506161305742351_thumb.jpg",
   "http://www.linkshop.com/news/2026550351.shtml": "http://www.linkshop.com/upload/article/2026/20260729095626_2425.jpg",
   "https://socialbeta.com/campaign/28059": "https://socialbeta.oss-cn-hangzhou.aliyuncs.com/upload/198246-1785224958.jpg",
-  "https://socialbeta.com/campaign/28043": "https://socialbeta.com/Upload/ava/1.jpg",
   "http://www.linkshop.com/news/2026550383.shtml": "http://www.linkshop.com/upload/article/2026/20260729181641_6941.png",
   "https://socialbeta.com/article/111254": "https://socialbeta.oss-cn-hangzhou.aliyuncs.com/upload/198728-1785237193.jpg');",
   "https://news.winshang.com/html/074/1345.html": "https://img1.winshang.com/newsimg/wsimg/2026/7/20260728102627744_d8dc100d47a2480ab0ffbec07b6e7611.jpg",
   "https://news.winshang.com/html/074/1359.html": "https://img1.winshang.com/newsimg/wsimg/2026/7/20260728173851679_4a179223435f415582395099ff4ec813.png",
-  "https://news.winshang.com/html/074/1358.html": "http://m.winshang.com/images/wslogo.jpg",
   "https://news.winshang.com/html/074/1349.html": "https://img1.winshang.com/newsimg/wsimg/2026/7/20260728104828208_a8eb977f20464e09baec3bd51ea03bcc.jpg",
   "https://news.winshang.com/html/074/1344.html": "https://img1.winshang.com/newsimg/wsimg/2026/7/20260728093641215_ab603f4b422644a4ab2a0449968acba3.png",
   "https://news.winshang.com/html/074/1356.html": "https://img1.winshang.com/newsimg/wsimg/2026/7/20260728150327109_8e81cdb96382430983747d078bbd2158.png",
@@ -45,7 +38,6 @@
   "https://news.winshang.com/html/074/1353.html": "https://img1.winshang.com/newsimg/wsimg/2026/7/20260728111500794_d4549b53fb304abe884a71047792f4d7.png",
   "https://news.winshang.com/html/074/1350.html": "https://img1.winshang.com/newsimg/wsimg/2026/7/20260728110007897_e5ff56f883a8450d98b67a51340dc254.png",
   "https://eu.36kr.com/zh/p/3914699672573061": "https://img.36krcdn.com/hsossms/20260728/v2_4dafcd69377545dba22ba9e9287af3e1@6208419_oswg1039339oswg1053oswg495_img_png?x-oss-process=image/resize,m_mfit,w_600,h_400,limit_0/crop,w_600,h_400,g_center",
-  "https://www.sz.gov.cn/cn/xxgk/zfxxgj/bmdt/content/post_12911274.html": "https://www.sz.gov.cn/img/4/4466/4466332/12911274.png&quot;",
   "https://www.eeo.com.cn/2026/0727/976459.shtml": "https://img.eeo.com.cn/2024/images/card.png",
   "https://news.winshang.com/html/074/1333.html": "https://img1.winshang.com/newsimg/wsimg/2026/7/20260727140351598_a14262b11e2c4309a1c32bca977cf8b7.jpg",
   "https://e.460.net.cn/a/562153.html": "https://img.bim99.cn/ssd/ssd4/5506/2026-07-08/5506_17835032986081.webp",
@@ -79,6 +71,8 @@
       preview.className = 'card-preview';
       const image = document.createElement('img');
       image.loading = 'lazy';
+      image.decoding = 'async';
+      image.fetchPriority = 'low';
       image.referrerPolicy = 'no-referrer';
       image.alt = original ? '原文图片预览' : '晨报分类配图';
       image.src = original || fallback[typeFor(text)];
@@ -96,9 +90,10 @@
 
   const start = () => {
     mount(document);
-    new MutationObserver(records => records.forEach(record => record.addedNodes.forEach(node => {
-      if (node.nodeType === 1) mount(node);
-    }))).observe(document.body, {childList:true, subtree:true});
+    document.addEventListener('click', event => {
+      const button = event.target.closest ? event.target.closest('.filters button') : null;
+      if (button) window.setTimeout(() => mount(document), 0);
+    });
   };
   document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', start) : start();
 })();
