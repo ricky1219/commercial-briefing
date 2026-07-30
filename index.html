@@ -13,6 +13,7 @@
 <body>
   <iframe id="briefing" title="陈瑶的商业晨报" src="about:blank"></iframe>
   <script>
+    if(location.search) history.replaceState(null,'',location.pathname);
     document.getElementById('briefing').src='2026-07-30.html?refresh='+Date.now();
     async function forceRefresh(){
       try{

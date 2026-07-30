@@ -19,10 +19,10 @@
     <a class="portal" href="huaian.html" target="_top"><b>8</b><span>淮安大事<br>本地资讯</span></a>
   </section>
   <button class="refresh" type="button" title="强制刷新" aria-label="强制刷新" onclick="window.top.forceRefresh()"><i>↻</i></button>
+  <section class="observe"><h2>今日观察</h2><ol><li><b>线下活动正从“造场景”走向“接体感”。</b>美的、安踏、爱回收等案例都把城市气候、社群或艺术展作为真实入口。</li><li><b>首店与空间更新要同内容一起交付。</b>西安首发经济、武汉新天地更新和天津 K11 周年均显示，招商、企划和传播应是一张协同表。</li><li><b>零售要同时看商品、渠道和运营效率。</b>即时零售、自有品牌、用工与渠道调整，是门店模型而不是单一促销问题。</li><li><b>热点借势可小而快，但必须有产品关联。</b>999、肯悦咖啡等案例以明确产品、赠品或消费场景承接讨论，才更容易转化。</li></ol></section>
   <nav class="filters" aria-label="昨日分类" id="filters"></nav>
   <div class="section-head"><h2 id="category-title">市场推广、企划与会员运营</h2><span id="category-count"></span></div>
   <div id="brief"></div>
-  <section class="observe"><h2>今日观察</h2><ol><li><b>线下活动正从“造场景”走向“接体感”。</b>美的、安踏、爱回收等案例都把城市气候、社群或艺术展作为真实入口。</li><li><b>首店与空间更新要同内容一起交付。</b>西安首发经济、武汉新天地更新和天津 K11 周年均显示，招商、企划和传播应是一张协同表。</li><li><b>零售要同时看商品、渠道和运营效率。</b>即时零售、自有品牌、用工与渠道调整，是门店模型而不是单一促销问题。</li><li><b>热点借势可小而快，但必须有产品关联。</b>999、肯悦咖啡等案例以明确产品、赠品或消费场景承接讨论，才更容易转化。</li></ol></section>
 </main>
 <nav class="bottom-nav" aria-label="主导航"><a class="active" href="./" target="_top">昨日</a><a href="archive.html" target="_top">更早</a><a href="design.html" target="_top">设计</a><a href="huaian.html" target="_top">淮安</a></nav>
 <script>
@@ -66,4 +66,4 @@ const groups=[
 ];
 let active='市场推广、企划与会员运营';const filters=document.getElementById('filters'),brief=document.getElementById('brief');function render(){filters.innerHTML=groups.map(g=>'<button class="'+(g[0]===active?'active':'')+'" data-cat="'+g[0]+'">'+g[0]+' · '+g[1].length+'</button>').join('');const g=groups.find(x=>x[0]===active);document.getElementById('category-title').textContent=active;document.getElementById('category-count').textContent=g[1].length+' 条 · 07.29 发布';brief.innerHTML='<section class="group"><div class="grid">'+g[1].map(x=>'<article class="card"><div class="meta"><span>'+x[1]+'</span><span>'+x[0]+'</span></div><h4>'+x[2]+'</h4><p>'+x[3]+'</p><p class="take"><b>可借鉴：</b>'+x[4]+'</p><div class="keywords">'+x[5]+'</div><a href="'+x[6]+'" target="_blank" rel="noopener">查看原文 ↗</a></article>').join('')+'</div></section>';filters.querySelectorAll('button').forEach(b=>b.onclick=()=>{active=b.dataset.cat;render()})}render();
 </script>
-</body></html>
+<script>(function(){if(location.search)history.replaceState(null,"",location.pathname);document.querySelectorAll(".bottom-nav a").forEach(function(a){a.addEventListener("click",function(){var u=new URL(a.href,location.href);u.searchParams.set("v",Date.now());a.href=u.pathname+u.search})})})()</script></body></html>
