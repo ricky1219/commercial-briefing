@@ -18,7 +18,7 @@
     <a class="portal" href="design.html" target="_top"><b>15</b><span>好设计案例</span></a>
     <a class="portal" href="huaian.html" target="_top"><b>8</b><span>淮安大事</span></a>
   </section>
-  <button class="refresh" type="button" title="强制刷新" aria-label="强制刷新" onclick="window.top.forceRefresh()"><i>↻</i></button>
+  <button class="refresh" type="button" title="强制刷新" aria-label="强制刷新" onclick="forceRefresh()"><i>↻</i></button>
   <section class="observe"><h2>今日观察</h2><ol><li><b>线下活动正从“造场景”走向“接体感”。</b>美的、安踏、爱回收等案例都把城市气候、社群或艺术展作为真实入口。</li><li><b>首店与空间更新要同内容一起交付。</b>西安首发经济、武汉新天地更新和天津 K11 周年均显示，招商、企划和传播应是一张协同表。</li><li><b>零售要同时看商品、渠道和运营效率。</b>即时零售、自有品牌、用工与渠道调整，是门店模型而不是单一促销问题。</li><li><b>热点借势可小而快，但必须有产品关联。</b>999、肯悦咖啡等案例以明确产品、赠品或消费场景承接讨论，才更容易转化。</li></ol></section>
   <nav class="filters" aria-label="昨日分类" id="filters"></nav>
   <div class="section-head"><h2 id="category-title">市场推广、企划与会员运营</h2><span id="category-count"></span></div>
@@ -26,6 +26,7 @@
 </main>
 <nav class="bottom-nav" aria-label="主导航"><a class="active" href="./" target="_top">昨日</a><a href="archive.html" target="_top">更早</a><a href="design.html" target="_top">设计</a><a href="huaian.html" target="_top">淮安</a></nav>
 <script>
+function forceRefresh(){const url=new URL(location.href);url.searchParams.set('v',Date.now());location.replace(url.pathname+url.search)}
 const groups=[
 ['市场推广、企划与会员运营',[
 ['07.29','SocialBeta','安踏以“城市运动会客厅”探索运动零售新店型','上海与沈阳新店以市集、运动体验和社群活动连接零售空间。','品牌店可用零售、体验、社群和配套业态提高停留与复访。','安踏、品牌门店、市集、运动社群','https://socialbeta.com/campaign/28056'],
