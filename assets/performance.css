@@ -1,0 +1,31 @@
+/* Shared mobile-performance layer: loaded after each page's local theme. */
+html{max-width:100%;overflow-x:hidden;overflow-x:clip;text-size-adjust:100%;-webkit-text-size-adjust:100%}
+body{max-width:100%;overflow-x:hidden;overflow-x:clip;-webkit-tap-highlight-color:transparent}
+.wrap{width:100%;min-width:0;overflow:hidden;overflow:clip}
+.head,.hero,.portals,.observe,.filters,.grid,.gallery,.summary,.kb-highlights,.kb-more-grid{min-width:0}
+.hero strong,.portal span,.card h3,.card h4,.card p,.observe li,.kb-highlight b,.kb-link{overflow-wrap:anywhere}
+
+/* Keep the fixed navigation crisp and inexpensive in WeChat's browser. */
+.bottom-nav{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:0 6px 18px rgba(25,45,30,.14)!important}
+.refresh{box-shadow:0 6px 16px rgba(14,112,75,.24)!important}
+
+/* Avoid doing layout/paint work for articles outside the viewport. */
+.card,.piece,.kb-highlight,.kb-more,.archive>a{content-visibility:auto;contain-intrinsic-size:auto 360px}
+.card-preview img,.piece img{background:#e8eee4}
+
+@media (hover:hover){
+  .portal{transition:transform .18s ease,border-color .18s ease}
+  .portal:hover{transform:translateY(-2px)}
+}
+@media (hover:none){
+  .portal:hover,.piece:hover img{transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+@media (max-width:620px){
+  .wrap{padding-left:16px!important;padding-right:16px!important}
+  .bottom-nav{left:8px!important;right:8px!important;bottom:8px!important}
+  .bottom-nav a{font-size:15px!important}
+  .hero{border-radius:22px!important}
+}
