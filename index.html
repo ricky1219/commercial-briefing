@@ -24,7 +24,7 @@
           await Promise.all(keys.map(key=>caches.delete(key)));
         }
       }catch(e){}
-      window.location.replace('./?refresh='+Date.now());
+      window.location.replace('./');
     }
   </script>
 </body>
