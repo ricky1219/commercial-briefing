@@ -90,9 +90,10 @@
 
   const start = () => {
     mount(document);
+    window.refreshNewsPreviews = () => mount(document);
     document.addEventListener('click', event => {
       const button = event.target.closest ? event.target.closest('.filters button') : null;
-      if (button) window.setTimeout(() => mount(document), 0);
+      if (button) window.setTimeout(window.refreshNewsPreviews, 0);
     });
   };
   document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', start) : start();
