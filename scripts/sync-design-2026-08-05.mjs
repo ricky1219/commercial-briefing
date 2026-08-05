@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+const source=fs.readFileSync('/tmp/zc-0805.html','utf8').replace(/\\"/g,'"').replace(/\\u0026/g,'&');
+const re=/\["w",\[(\d+),"([^"]+)","([^"]+)","([^"]+)","([^"]+)","([^"]+)","([^"]+)",/g;
+const raw=[];let m;while((m=re.exec(source))&&raw.length<15)raw.push(m.slice(1,8));
+if(raw.length!==15)throw new Error('ZCOOL latest list unavailable');
+const kinds=['推广活动','推广活动','推广活动','推广活动','品牌与IP','品牌与IP','品牌与IP','品牌与IP','包装与零售','包装与零售','包装与零售','包装与零售','视觉资产','视觉资产','视觉资产'];
+const tips={推广活动:'把主题画面延展到现场动线、任务与社媒内容，形成可参与的传播。',品牌与IP:'品牌系统需贯通空间、物料与商品触点，才会成为可持续资产。',包装与零售:'包装应同时解决货架识别、产品故事和礼赠体验。',视觉资产:'可延展的视觉语言适合沉淀为栏目、导视与会员内容资产。'};
+const latest=raw.map((x,i)=>[kinds[i],x[6]||x[5],x[2],'站酷公开首页推荐',tips[kinds[i]],`https://www.zcool.com.cn/work/${x[1]}.html`,x[3]]);
+let h=fs.readFileSync('design.html','utf8');const hit=h.match(/const cases=(\[[\s\S]*?\]);const pastCases=(\[[\s\S]*?\]);let active=/);if(!hit)throw Error('design data missing');
+const old=Function(`return ${hit[1]}`)(),past=[...old.map(x=>['往期精选','站酷归档',...x.slice(2)]),...Function(`return ${hit[2]}`)()];
+h=h.replace(/采集于 2026\.\d\d\.\d\d/,'采集于 2026.08.05').replace(/首页推荐采集于 2026\.\d\d\.\d\d/,'首页推荐采集于 2026.08.05').replace(/<div class="stat"><b>15<\/b><span>最新案例<\/span><\/div><div class="stat"><b>[^<]+<\/b><span>四类分布<\/span><\/div><div class="stat"><b>\d+<\/b><span>往期精选归档<\/span><\/div>/,`<div class="stat"><b>15</b><span>最新案例</span></div><div class="stat"><b>4 / 4 / 4 / 3</b><span>四类分布</span></div><div class="stat"><b>${past.length}</b><span>往期精选归档</span></div>`).replace(/const cases=\[[\s\S]*?\];const pastCases=\[[\s\S]*?\];let active=/,`const cases=${JSON.stringify(latest)};const pastCases=${JSON.stringify(past)};let active=`);
+fs.writeFileSync('design.html',h);console.log('Design synced',latest.length,past.length);
