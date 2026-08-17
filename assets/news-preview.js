@@ -1,4 +1,4 @@
-(() => {
+(root => {
   const sourceCovers = {
   "https://socialbeta.com/campaign/28049": "https://socialbeta.oss-cn-hangzhou.aliyuncs.com/upload/210618-1785227908.jpg",
   "https://socialbeta.com/campaign/28052": "https://socialbeta.oss-cn-hangzhou.aliyuncs.com/upload/198246-1785235505.jpg",
@@ -44,13 +44,13 @@
   "https://m.21jingji.com/article/20260723/herald/79984a6573f7847fce8d0a24a588dfde.html": "https://ocmsmedia.sfccn.com/vod-4310da/image/default/877C3F3A41BC4A36A57424692594F551-6-2.png",
   "https://tt.xinmin.cn/2026/06/30/32892069.htm": "https://images.shobserver.com/news/690_390/2026/06/30/l_cb20260630174946778021.jpeg"
 };
-  window.articleCovers = sourceCovers;
+  if (root) root.articleCovers = sourceCovers;
   const fallback = {
-    promo: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80',
-    retail: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80',
-    property: 'https://images.unsplash.com/photo-1519567241046-7f570eee3ce6?auto=format&fit=crop&w=1200&q=80',
-    data: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
-    city: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1200&q=80'
+    promo: 'assets/covers/promo.svg',
+    retail: 'assets/covers/retail.svg',
+    property: 'assets/covers/property.svg',
+    data: 'assets/covers/data.svg',
+    city: 'assets/covers/city.svg'
   };
 
   const typeFor = text => {
@@ -61,22 +61,33 @@
     return 'property';
   };
 
+  const isSafeOriginal = url => /^https:\/\//.test(url || '') && !/^https:\/\/(?:www\.)?linkshop\.com\//.test(url || '');
+  const pickImage = (url, text) => isSafeOriginal(url) ? url : fallback[typeFor(text || '')];
+  const api = { typeFor, isSafeOriginal, pickImage };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  if (!root || !root.document) return;
+  const document = root.document;
+
   const mount = scope => {
     if (!scope.querySelectorAll) return;
     scope.querySelectorAll('.card').forEach(card => {
       if (/今日启示/.test(card.textContent)) return;
       const text = card.textContent || '';
       const articleLink = [...card.querySelectorAll('a[href^="http"]')].map(link => link.href)[0] || '';
-      const original = card.dataset.cover || sourceCovers[articleLink] || '';
+      const rawOriginal = card.dataset.cover || sourceCovers[articleLink] || '';
+      const original = isSafeOriginal(rawOriginal) ? rawOriginal : '';
+      const src = pickImage(rawOriginal, text);
+      const labelText = original ? '原文图片' : '晨报配图';
       const existing = card.querySelector('.card-preview');
       if (existing) {
-        if (original && existing.dataset.fallback === 'true') {
-          const existingImage = existing.querySelector('img');
-          const existingLabel = existing.querySelector('span');
-          if (existingImage) existingImage.src = original;
-          if (existingLabel) existingLabel.textContent = '原文图片';
-          existing.dataset.fallback = 'false';
+        const existingImage = existing.querySelector('img');
+        const existingLabel = existing.querySelector('span');
+        if (existingImage) {
+          existingImage.onerror = () => { existingImage.onerror = null; existingImage.src = fallback[typeFor(text)]; if (existingLabel) existingLabel.textContent = '晨报配图'; existing.dataset.fallback = 'true'; };
+          existingImage.src = src;
         }
+        if (existingLabel) existingLabel.textContent = labelText;
+        existing.dataset.fallback = original ? 'false' : 'true';
         return;
       }
       const preview = document.createElement('div');
@@ -88,14 +99,14 @@
       image.fetchPriority = 'low';
       image.referrerPolicy = 'no-referrer';
       image.alt = original ? '原文图片预览' : '晨报分类配图';
-      image.src = original || fallback[typeFor(text)];
+      image.src = src;
       image.onerror = () => {
         image.onerror = null;
         image.src = fallback[typeFor(text)];
         label.textContent = '晨报配图';
       };
       const label = document.createElement('span');
-      label.textContent = original ? '原文图片' : '晨报配图';
+      label.textContent = labelText;
       preview.append(image, label);
       card.prepend(preview);
     });
@@ -103,11 +114,11 @@
 
   const start = () => {
     mount(document);
-    window.refreshNewsPreviews = () => mount(document);
+    root.refreshNewsPreviews = () => mount(document);
     document.addEventListener('click', event => {
       const button = event.target.closest ? event.target.closest('.filters button') : null;
-      if (button) window.setTimeout(window.refreshNewsPreviews, 0);
+      if (button) root.setTimeout(root.refreshNewsPreviews, 0);
     });
   };
   document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', start) : start();
-})();
+})(typeof window !== 'undefined' ? window : null);
