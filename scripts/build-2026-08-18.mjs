@@ -32,6 +32,8 @@ let html = fs.readFileSync('2026-08-17.html', 'utf8')
   .split('08.16').join(Y);
 html = html
   .replace(/<section class="hero">[\s\S]*?<\/section>/, '<section class="hero"><p>严格昨日版 · 仅收录 08.17 发布、可公开核验的独立报道</p><strong>城市商业的在地运营、会员店与咖啡竞争、首发经济，是当天值得持续跟进的三条线索；实际收录 9 条。</strong></section>')
+  .replace('<a class="portal" href="./" target="_top"><b>15</b><span>昨日发生</span></a>', '<a class="portal" href="./" target="_top"><b>9</b><span>昨日发生</span></a>')
+  .replace('本版只发布可公开核验的 15 条独立内容。', '本版只发布可公开核验的 9 条独立内容。')
   .replace(/const groups=\[[\s\S]*?\];\nconst categoryPreview=/, `const groups=${JSON.stringify(groups)};\nconst categoryPreview=`);
 fs.writeFileSync(`${D}.html`, html);
 fs.writeFileSync('index.html', html);
