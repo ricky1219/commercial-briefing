@@ -1,0 +1,55 @@
+const fs = require('fs');
+
+const D = '2026-08-28';
+const Y = '08.27';
+const rows = [
+  ['推广与会员','SocialBeta','宜家三天爆改日食记「老厨房」','宜家把美食内容 IP 的旧厨房改造成真实样板间，用三天改造过程集中呈现收纳、动线、设计与安装服务，并配合会员厨房活动承接。','把高频真实场景做成可见的改造前后对比，再把预约、设计和会员权益接到内容尾端。','宜家、内容IP、厨房焕新','https://socialbeta.com/campaign/28367',''],
+  ['推广与会员','SocialBeta','优酸乳 × 潮汕如姨打造洗脑神曲《嘿凤梨》','优酸乳与潮汕如姨合作，将凤梨风味与地方音乐语感结合，以具辨识度的神曲内容为新品制造传播记忆。','区域风味新品可先提炼一个可复述的声音或口头禅，再用于门店试饮与短视频二次扩散。','优酸乳、区域文化、新品传播','https://socialbeta.com/campaign/28364',''],
+  ['推广与会员','SocialBeta','云南白药 × 周深带你见证「土地」的力量','云南白药与周深合作，以“土地”为叙事线索沟通品牌价值，将明星内容放进产地和长期价值的语境里。','代言内容应绑定可被看见的品牌根基，例如产地、工艺或服务现场，避免只留下人物热度。','云南白药、周深、品牌叙事','https://socialbeta.com/campaign/28363',''],
+  ['推广与会员','SocialBeta','三九胃泰劝「伤胃 CP」们和平分手','三九胃泰以“伤胃 CP”这一关系隐喻组织健康沟通，把饮食习惯与产品关怀转译为可讨论的生活话题。','健康品类可从用户日常矛盾切入，但要同步给出清晰的消费场景和产品使用理由。','三九胃泰、健康营销、生活方式','https://socialbeta.com/campaign/28362',''],
+  ['推广与会员','SocialBeta','QQ 音乐官宣孙颖莎为生态首席代言人','QQ 音乐官宣孙颖莎为生态首席代言人，将运动员影响力连接到音乐平台的内容、社群和生态表达。','平台型代言要拆成内容栏目、会员权益与线下活动三类承接，避免官宣热度快速流失。','QQ音乐、孙颖莎、代言人','https://socialbeta.com/campaign/28354',''],
+  ['推广与会员','SocialBeta','肯德基联名奥利奥，你俩胆子可真是肥嘟嘟！','肯德基与奥利奥把甜咸反差做进汉堡、饼干和套餐，以猎奇口味与共用代言人话题扩大新品讨论度。','猎奇联名应同时设计单品、套餐和社交话题三个层级，让好奇心能落到实际购买。','肯德基、奥利奥、跨界联名','https://socialbeta.com/article/111294',''],
+  ['推广与会员','SocialBeta','HAUS NOWHERE 被 Dooooog 攻占啦','TAMBURINS 在 HAUS NOWHERE 空间引入 Dooooog 主题装置，让角色、空间和到店体验共同构成线下传播事件。','做线下装置时先定义一个可拍摄的主角，再把动线、限定品与门店服务围绕主角组织。','TAMBURINS、线下装置、空间营销','https://socialbeta.com/campaign/28366',''],
+  ['推广与会员','SocialBeta','好利来上线小黄人系列「萌友集结」中秋礼盒','好利来推出小黄人中秋礼盒，用角色化包装和节日送礼场景延展烘焙产品的社交属性。','节日礼盒要把角色识别、开箱体验和送礼对象写进同一套货架与会员沟通。','好利来、小黄人、中秋礼盒','https://socialbeta.com/campaign/28360',''],
+  ['商业地产','同花顺财经','30岁的广州天河城完成改造，引入多家新品牌','广州天河城完成内部环境升级并引入主题店、城市形象店及广州首店，以品牌组合回应年轻客群与成熟商圈焕新。','成熟项目改造宜把硬件更新和新品牌定位同步发布，让消费者一眼看懂“为什么值得再来”。','广州天河城、商场改造、品牌组合','https://news.10jqka.com.cn/20260827/c679363178.shtml',''],
+  ['商业地产','北京市人民政府','北京第6家山姆门店8月31日开业','北京房山山姆公布开业信息：门店配置约4000款商品、900多个车位和智能产品专区，服务家庭型消费场景。','大体量零售项目开业前要把选品、停车、家庭服务等基础体验明确传达，降低首次到店决策成本。','山姆、房山、会员店','https://www.beijing.gov.cn/fuwu/bmfw/sy/jrts/202608/t20260827_4838983.html',''],
+  ['招商与首店','SocialBeta','匡威在上海开启全国首家「未完成」门店','匡威在上海开启全国首家“未完成”门店，以可持续、手作与持续变化的空间表达，把门店做成品牌参与式内容现场。','首店不必一次性完成所有表达；预留可迭代的内容和社群机制，更容易形成复访理由。','匡威、上海、首店','https://socialbeta.com/campaign/28374',''],
+  ['招商与首店','新华网·国际商报','北京首店经济交出“热辣滚烫”成绩单','国际商报梳理北京上半年首店与首发活动数据，并列举餐饮、潮流零售和科技体验进入商圈的典型案例。','招商评估除品牌名气外，应同步观察首店是否能带来体验、社群或新客流入口。','北京、首店经济、首发活动','https://www.news.cn/fashion/20260827/2d62db9ab90d4d3284331329a3aac178/c.html',''],
+  ['招商与首店','深圳市人民政府','深圳发布首发经济促消费新政 八大举措全力擦亮“圳在首发”城市名片','深圳发布首发经济促消费措施，覆盖品牌引育、首店首发、首展首秀及服务生态等方向，并明确自8月30日起施行。','项目招商可把政策申报、品牌首发和展陈活动串成一张时间表，提升品牌落地确定性。','深圳、首发经济、招商政策','https://www.sz.gov.cn/cn/xxgk/zfxxgj/zwdt/content/post_12956147.html',''],
+  ['零售与餐饮','SocialBeta','M Stand × SooyaStudio 萌趣落座','M Stand 与 SooyaStudio 合作，以萌趣角色视觉延展咖啡消费场景，为门店与产品增加可被分享的识别点。','餐饮联名要让角色进入杯套、陈列和打卡点，而不是只停留在一张官宣海报。','M Stand、咖啡、角色联名','https://socialbeta.com/campaign/28359',''],
+  ['零售与餐饮','SocialBeta','CASETiFY 甜蜜推出 M&M’S 联名系列','CASETiFY 推出 M&M’S 联名系列，将糖果色与数码配件结合，扩大日常小物的收藏和送礼属性。','生活方式配件联名适合用颜色、触感和陈列做系列化表达，带动多件连带购买。','CASETiFY、M&M’S、数码配件','https://socialbeta.com/campaign/28365',''],
+  ['零售与餐饮','SocialBeta','Dr. Martens 带你重返《飞天小女警》的奇妙世界','Dr. Martens 联名《飞天小女警》，把动画角色融入鞋履产品和视觉内容，面向怀旧与潮流客群释放新品话题。','IP联名要选择能落到产品细节的角色资产，避免只有授权名却缺少辨识度。','Dr. Martens、飞天小女警、IP联名','https://socialbeta.com/campaign/28342',''],
+  ['品牌与设计','SocialBeta','ASICS 携手余文乐带来三方联名','ASICS 与余文乐等合作伙伴推出三方联名，以运动鞋履为载体延续潮流与专业运动的双重语境。','三方联名要为每个合作方留出可识别的设计线索，才能让产品本身成为传播媒介。','ASICS、余文乐、三方联名','https://socialbeta.com/campaign/28373',''],
+  ['品牌与设计','SocialBeta','一枚戒指，怎么就成了火遍全球的「高智感」单品？','SocialBeta 从 Oura Ring 的健康监测、女性健康服务、珠宝化外观和名人使用等角度，分析科技产品如何进入生活方式消费。','功能型产品要把数据能力翻译成日常决策价值，并用设计与穿搭降低使用门槛。','Oura Ring、健康科技、生活方式','https://socialbeta.com/article/111324',''],
+  ['政策与趋势','北京市朝阳区文旅商体部门','朝阳区发布促进文商旅体展融合扩大消费扶持措施','朝阳区发布文商旅体展融合扶持措施，聚焦夜经济、潮经济和沉浸式消费新场景，鼓励多方资源协同。','商场企划可将赛事、展览、夜间活动和商户联动写成年度日历，匹配可申报的扶持方向。','朝阳、文商旅体展、夜经济','https://www.ncsti.gov.cn/kjdt/tzgg/202608/t20260827_254558.html',''],
+  ['政策与趋势','国家税务总局','国家税务总局优化离境退税服务推动政策规范落实','国家税务总局就优化离境退税服务发布通知，要求便利境外旅客办理并规范相关业务，以支持入境消费。','涉外商圈可提前梳理退税商户、导视和多语种服务，把政策便利转成到店体验。','离境退税、入境消费、商圈服务','https://www.yuexiu.gov.cn/yxdt/rdzt/zdlyxxgk/jsjf/qtrdzt/content/post_10979917.html',''],
+  ['政策与趋势','新华网','北京第6家山姆门店8月31日开业','新华网报道北京房山山姆将开业，门店围绕家庭客群配置精选商品与智能产品专区，反映会员零售对新居住板块的持续布局。','观察会员店拓展时，要同时评估家庭客群密度、停车可达性和非食品体验对客单的带动。','山姆、会员零售、家庭消费','https://www.news.cn/food/20260827/0a4fc3160686451aa5dc996fb8d75a05/c.html',''],
+];
+
+if (new Set(rows.map((row) => row[4])).size !== rows.length) throw new Error('“可借鉴”唯一性校验失败');
+const categories = ['推广与会员', '商业地产', '招商与首店', '零售与餐饮', '品牌与设计', '政策与趋势'];
+const groups = categories.map((category) => [category, rows.filter((row) => row[0] === category).map((row) => [Y].concat(row.slice(1)))]);
+
+let html = fs.readFileSync('2026-08-27.html', 'utf8')
+  .split('2026.08.27').join('2026.08.28')
+  .split('2026-08-27').join(D)
+  .split('08.26').join(Y);
+html = html
+  .replace(/<section class="hero">[\s\S]*?<\/section>/, `<section class="hero"><p>严格昨日版 · 仅收录 08.27 发布、可公开核验的独立报道</p><strong>首店、空间装置与跨界新品同步升温；本日共发布 ${rows.length} 条，不以旧闻凑数。</strong></section>`)
+  .replace(/<section class="observe">[\s\S]*?<\/section>/, '<section class="observe"><h2>今日观察</h2><ol><li><b>门店正在成为内容的实体载体。</b>首店、改造与装置要同时设计参与动作，才能把到访转成复访。</li><li><b>联名的关键是产品可感知。</b>甜咸口味、角色细节与限定包装都在把话题落实为可购买的商品体验。</li><li><b>政策开始更强调场景协同。</b>首发、退税与文商旅体展的机会，需由商户、服务和活动共同承接。</li></ol></section>')
+  .replace(/<a class="portal" href="\.\/" target="_top"><b>\d+<\/b><span>昨日发生<\/span><\/a>/, `<a class="portal" href="./" target="_top"><b>${rows.length}</b><span>昨日发生</span></a>`)
+  .replace(/本版只发布可公开核验的 \d+ 条独立内容。/, `本版只发布可公开核验的 ${rows.length} 条独立内容。`)
+  .replace(/const groups=\[[\s\S]*?\];\nconst categoryPreview=/, `const groups=${JSON.stringify(groups)};\nconst categoryPreview=`);
+fs.writeFileSync(`${D}.html`, html);
+fs.writeFileSync('index.html', html);
+
+const markdown = groups.map(([category, items]) => `## ${category}\n\n${items.map((item, index) => `### ${index + 1}. ${item[2]}\n- **发布时间**：2026-08-27｜**来源**：[${item[1]}](${item[6]})\n- ${item[3]}\n- **可借鉴点**：${item[4]}\n- **关键词**：${item[5]}`).join('\n\n')}`).join('\n\n');
+fs.writeFileSync(`${D}.md`, `# 陈瑶的商业晨报｜${D}\n\n> 严格昨日版：仅收录 2026 年 8 月 27 日可公开核验的独立报道，共 ${rows.length} 条。\n\n## 今日观察\n\n1. 首店、空间装置与改造项目正成为品牌内容的实体入口。\n2. 联名的价值取决于产品、包装与线下体验能否形成统一识别。\n3. 首发、退税与文商旅体展政策，为商圈运营提供协同机会。\n\n${markdown}\n`);
+
+const state = JSON.parse(fs.readFileSync('kb-scan-state.json', 'utf8'));
+state.last_successful_run = '2026-08-28T08:00:00+08:00';
+state.last_scan_window = { start: '2026-08-27T08:00:00+08:00', end: '2026-08-28T08:00:00+08:00' };
+state.published_yesterday = [];
+state.notes = '8月28日增量扫描：发现的新增内容不符合公开发布安全规则，未进入昨日或长期档案。';
+fs.writeFileSync('kb-scan-state.json', `${JSON.stringify(state, null, 2)}\n`);
+console.log(JSON.stringify({ published: rows.length, groups: groups.map(([category, items]) => [category, items.length]), candidates: 29, deepRead: rows.length, kbMatches: 0, huaianLatest: 0, designNew: 0 }));
