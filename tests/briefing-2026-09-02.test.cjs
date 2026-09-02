@@ -1,0 +1,14 @@
+const assert = require('assert');
+const fs = require('fs');
+const html = fs.readFileSync('2026-09-02.html', 'utf8');
+const match = html.match(/const groups=(\[[\s\S]*?\]);\nconst categoryPreview=/);
+assert.ok(match, '应内嵌日报分组数据');
+const groups = JSON.parse(match[1]);
+const items = groups.flatMap(([, rows]) => rows);
+assert.strictEqual(items.length, 20, '应发布20条昨日内容');
+assert.ok(items.every((item) => item[0] === '09.01'), '仅允许昨日日期');
+assert.strictEqual(new Set(items.map((item) => item[4])).size, items.length, '可借鉴点必须逐条唯一');
+assert.ok(items.every((item) => /^https:\/\//.test(item[6])), '每条必须有公开来源链接');
+assert.ok(html.includes('2026.09.02 · 昨日范围：09.01'), '页头日期应正确');
+assert.ok(html.includes('本日共发布 20 条，不以旧闻凑数。'), '应展示真实数量');
+console.log('briefing-2026-09-02: ok');
